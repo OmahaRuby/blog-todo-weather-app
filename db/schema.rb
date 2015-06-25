@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528000525) do
+ActiveRecord::Schema.define(version: 20150625000739) do
 
   create_table "items", force: :cascade do |t|
     t.string   "title"
     t.datetime "completed_at"
     t.text     "body"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.decimal  "temperature_when_created"
+    t.decimal  "temperature_when_completed"
   end
 
   add_index "items", ["completed_at"], name: "index_items_on_completed_at"
