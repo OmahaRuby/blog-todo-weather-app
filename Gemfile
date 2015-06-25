@@ -12,6 +12,8 @@ gem 'turbolinks'
 
 gem 'haml-rails'
 
+gem 'forecast_io'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
