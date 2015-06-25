@@ -1,14 +1,16 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
-    @items = Item.all
+    @items = items
   end
 
   def new
-    @item = Item.new
+    @item = items.new
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = items.new(item_params)
 
     if @item.save
       flash[:notice] = "#{@item.title} was created successfully."
@@ -20,11 +22,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+    @item = items.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
+    @item = items.find(params[:id])
 
     if @item.update_attributes(item_params)
       flash[:notice] = "#{@item.title} was updated successfully."
@@ -36,11 +38,11 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = items.find(params[:id])
   end
 
   def destroy
-    @item = Item.find(params[:id])
+    @item = items.find(params[:id])
 
     @item.destroy!
 
@@ -48,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def mark_as_done
-    @item = Item.find(params[:item_id])
+    @item = items.find(params[:item_id])
 
     @item.completed_at = Time.now
     @item.save!
@@ -59,6 +61,10 @@ class ItemsController < ApplicationController
   end
 
   private
+  
+  def items
+    current_user.items
+  end
 
   def item_params
     params.require(:item).permit(:title, :body)

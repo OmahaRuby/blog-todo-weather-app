@@ -14,9 +14,5 @@
  *= require_self
  */
 
-
-#notice {
-  background-color: #EEE;
-  border-radius: 0.5em;
-  padding: 0.5em;
-}
+@import "bootstrap-sprockets";
+@import "bootstrap";

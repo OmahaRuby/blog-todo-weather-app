@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  belongs_to :user
+  
   validates :title, presence: true, uniqueness: true
   
   before_create :set_temperature_when_created
