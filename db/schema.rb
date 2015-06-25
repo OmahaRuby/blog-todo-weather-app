@@ -11,9 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625003544) do
+ActiveRecord::Schema.define(version: 20150625010515) do
 
-  create_table "items", force: :cascade do |t|
+  create_table "blogs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "blogs", ["user_id"], name: "index_blogs_on_user_id"
+
+  create_table "entries", force: :cascade do |t|
     t.string   "title"
     t.datetime "completed_at"
     t.text     "body"
@@ -21,11 +31,11 @@ ActiveRecord::Schema.define(version: 20150625003544) do
     t.datetime "updated_at",                 null: false
     t.decimal  "temperature_when_created"
     t.decimal  "temperature_when_completed"
-    t.integer  "user_id"
+    t.integer  "blog_id"
   end
 
-  add_index "items", ["completed_at"], name: "index_items_on_completed_at"
-  add_index "items", ["user_id"], name: "index_items_on_user_id"
+  add_index "entries", ["blog_id"], name: "index_entries_on_blog_id"
+  add_index "entries", ["completed_at"], name: "index_entries_on_completed_at"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

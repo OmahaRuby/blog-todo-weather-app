@@ -1,0 +1,32 @@
+%h1
+  = @entry.title
+
+- if @entry.completed_at.present?
+  %h4
+    This entry was competed at
+    = @entry.completed_at
+
+%a{href: entries_path}
+  Back to list
+
+&nbsp;
+
+%a{href: edit_entry_path(@entry)}
+  Edit
+
+&nbsp;
+
+= link_to 'Delete', entry_path(@entry), method: :delete, data: { confirm: 'Are you sure?' }
+
+- if @entry.completed_at.present?
+  (The temperature was 
+  = @entry.temperature_when_completed
+  at that time)
+- else
+  = link_to 'Mark As Done', entry_mark_as_done_path(@entry), method: :post
+
+.entry-body
+  = @entry.body
+  ( The temperature was
+  = @entry.temperature_when_created
+  when this entry was created)

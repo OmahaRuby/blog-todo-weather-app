@@ -1,0 +1,17 @@
+%h1
+  Blogs
+  
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        Title
+      %th
+
+  %tbody
+    - @blogs.each do |blog|
+      %tr
+        %td
+          = blog.title
+        %td
+          = link_to 'View', blog_path(blog)

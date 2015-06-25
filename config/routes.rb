@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   
-  resources :items do
-    post 'mark-as-done' => 'items#mark_as_done'
+  resources :blogs do
+    resources :entries do
+      post 'mark-as-done' => 'entries#mark_as_done'
+    end
   end
-
-  root to: 'items#index'
+  
+  root to: 'blogs#index'
 end
